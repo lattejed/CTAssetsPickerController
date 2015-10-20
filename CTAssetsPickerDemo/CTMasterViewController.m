@@ -47,7 +47,7 @@
 
 #import "CTLayoutViewController.h"
 
-
+#import "LJAsyncFilesViewController.h"
 
 
 @implementation CTMasterViewController
@@ -64,33 +64,37 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     switch (section) {
         case 0:
-            return 6;
-            break;
-
-        case 1:
-            return 1;
-            break;
-        
-        case 2:
-            return 4;
-            break;
-
-        case 3:
             return 1;
             break;
             
+        case 1:
+            return 6;
+            break;
+
+        case 2:
+            return 1;
+            break;
+        
+        case 3:
+            return 4;
+            break;
+
         case 4:
             return 1;
             break;
             
         case 5:
+            return 1;
+            break;
+            
+        case 6:
             return 1;
             break;
             
@@ -104,26 +108,30 @@
 {
     switch (section) {
         case 0:
-            return @"Basic";
+            return @"Async Files";
             break;
             
         case 1:
-            return @"Sorting";
+            return @"Basic";
             break;
             
         case 2:
-            return @"Filtering";
+            return @"Sorting";
             break;
             
         case 3:
-            return @"Programmatic";
+            return @"Filtering";
             break;
             
         case 4:
-            return @"Apperance";
+            return @"Programmatic";
             break;
             
         case 5:
+            return @"Apperance";
+            break;
+            
+        case 6:
             return @"CollectionView Layout (Experimental)";
             break;
             
@@ -150,6 +158,12 @@
     if (section == 0)
     {
         if (row == 0)
+            title = @"Async files";
+    }
+    
+    if (section == 1)
+    {
+        if (row == 0)
             title = @"Simple uses";
         
         if (row == 1)
@@ -168,13 +182,13 @@
             title = @"UI tweaks";
     }
     
-    if (section == 1)
+    if (section == 2)
     {
         if (row == 0)
             title = @"Lastest assets on top";
     }
     
-    if (section == 2)
+    if (section == 3)
     {
         if (row == 0)
             title = @"Photos only";
@@ -189,19 +203,19 @@
             title = @"iCloud albums, sorted by no. of assets";
     }
     
-    if (section == 3)
+    if (section == 4)
     {
         if (row == 0)
             title = @"Programmatically de/select assets";
     }
     
-    if (section == 4)
+    if (section == 5)
     {
         if (row == 0)
             title = @"UI customisation";
     }
     
-    if (section == 5)
+    if (section == 6)
     {
         if (row == 0)
             title = @"Grid view layout customisation";
@@ -222,7 +236,12 @@
     
     UIViewController *vc;
     
-    if (section == 0)
+    if (section == 0) {
+        if (row == 0)
+            vc = (UIViewController *)[LJAsyncFilesViewController new];
+    }
+    
+    if (section == 1)
     {
         if (row == 0)
             vc = (UIViewController *)[CTBasicViewController new];
@@ -243,13 +262,13 @@
             vc = (UIViewController *)[CTUITweaksViewController new];
     }
     
-    if (section == 1)
+    if (section == 2)
     {
         if (row == 0)
             vc = (UIViewController *)[CTSortedAssetsViewController new];
     }
     
-    if (section == 2)
+    if (section == 3)
     {
         if (row == 0)
             vc = (UIViewController *)[CTPhotosViewController new];
@@ -264,19 +283,19 @@
             vc = (UIViewController *)[CTiCloudAlbumsViewController new];
     }
     
-    if (section == 3)
+    if (section == 4)
     {
         if (row == 0)
             vc = (UIViewController *)[CTProgrammaticViewController new];
     }
     
-    if (section == 4)
+    if (section == 5)
     {
         if (row == 0)
             vc = (UIViewController *)[CTApperanceViewController new];
     }
 
-    if (section == 5)
+    if (section == 6)
     {
         if (row == 0)
             vc = (UIViewController *)[CTLayoutViewController new];
