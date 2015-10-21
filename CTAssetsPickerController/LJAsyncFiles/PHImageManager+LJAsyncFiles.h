@@ -1,5 +1,5 @@
 //
-//  PHFetchResult+LJAsyncFiles.h
+//  PHImageManager+LJAsyncFiles.h
 //  CTAssetsPickerDemo
 //
 //  Created by Matthew Smith on 10/21/15.
@@ -8,10 +8,6 @@
 
 #import <Photos/Photos.h>
 
-@interface PHFetchResult (LJAsyncFiles)
-
-@property (assign) BOOL lj_asyncFiles;
-
-- (void)lj_addObject:(id)object;
+@interface PHImageManager (LJAsyncFiles)
 
 @end

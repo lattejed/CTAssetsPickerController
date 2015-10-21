@@ -13,7 +13,7 @@
 #import "LJAsyncFile.h"
 
 static void* const kPHFetchResult_LJAsyncFiles_BackingStore     = (void *)&kPHFetchResult_LJAsyncFiles_BackingStore;
-static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFetchResult_LJAsyncFiles_AsyncFile;
+static void* const kPHFetchResult_LJAsyncFiles_AsyncFiles       = (void *)&kPHFetchResult_LJAsyncFiles_AsyncFiles;
 
 @implementation PHFetchResult (LJAsyncFiles)
 
@@ -34,21 +34,28 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
                                                  @"enumerateObjectsUsingBlock:",
                                                  @"enumerateObjectsWithOptions:usingBlock:",
                                                  @"enumerateObjectsAtIndexes:options:usingBlock:",
-                                                 @"countOfAssetsWithMediaType:"
+                                                 @"countOfAssetsWithMediaType:",
+                                                 
+                                                 // NSFastEnumeration
+                                                 @"countByEnumeratingWithState:objects:count:"
                                                  ]];
     });
 }
 
 #pragma mark -
 
-- (BOOL)lj_asyncFile {
-    NSNumber* val = objc_getAssociatedObject(self, kPHFetchResult_LJAsyncFiles_AsyncFile);
+- (void)lj_addObject:(id<LJAsyncFile>)object {
+    [self.lj_backingStore addObject:object];
+}
+
+- (BOOL)lj_asyncFiles {
+    NSNumber* val = objc_getAssociatedObject(self, kPHFetchResult_LJAsyncFiles_AsyncFiles);
     return val != nil ? [val boolValue] : NO;
 }
 
-- (void)setLj_asyncFile:(BOOL)lj_asyncFile {
-    NSNumber* val = [NSNumber numberWithBool:lj_asyncFile];
-    objc_setAssociatedObject(self, kPHFetchResult_LJAsyncFiles_AsyncFile, val, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setLj_asyncFiles:(BOOL)lj_asyncFiles {
+    NSNumber* val = [NSNumber numberWithBool:lj_asyncFiles];
+    objc_setAssociatedObject(self, kPHFetchResult_LJAsyncFiles_AsyncFiles, val, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSMutableArray<id<LJAsyncFile>> *)lj_backingStore {
@@ -64,7 +71,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (NSUInteger)lj_count {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         return [self.lj_backingStore count];
     } else {
         return [self lj_count];
@@ -73,7 +80,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (id)lj_objectAtIndex:(NSUInteger)index {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         return [self.lj_backingStore objectAtIndex:index];
     } else {
         return [self lj_objectAtIndex:index];
@@ -82,7 +89,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (id)lj_objectAtIndexedSubscript:(NSUInteger)idx {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         return [self.lj_backingStore objectAtIndexedSubscript:idx];
     } else {
         return [self lj_objectAtIndexedSubscript:idx];
@@ -91,7 +98,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (BOOL)lj_containsObject:(id)anObject {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         return [self.lj_backingStore containsObject:anObject];
     } else {
         return [self lj_containsObject:anObject];
@@ -100,7 +107,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (NSUInteger)lj_indexOfObject:(id)anObject {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         return [self.lj_backingStore indexOfObject:anObject];
     } else {
         return [self lj_indexOfObject:anObject];
@@ -109,7 +116,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (NSUInteger)lj_indexOfObject:(id)anObject inRange:(NSRange)range {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         return [self.lj_backingStore indexOfObject:anObject inRange:range];
     } else {
         return [self lj_indexOfObject:anObject inRange:range];
@@ -118,7 +125,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (id)lj_firstObject {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         return [self.lj_backingStore firstObject];
     } else {
         return [self lj_firstObject];
@@ -127,7 +134,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (id)lj_lastObject {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         return [self.lj_backingStore lastObject];
     } else {
         return [self lj_lastObject];
@@ -136,7 +143,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (NSArray<id> *)lj_objectsAtIndexes:(NSIndexSet *)indexes {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         return [self.lj_backingStore objectsAtIndexes:indexes];
     } else {
         return [self lj_objectsAtIndexes:indexes];
@@ -145,7 +152,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (void)lj_enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         [self.lj_backingStore enumerateObjectsUsingBlock:block];
     } else {
         [self lj_enumerateObjectsUsingBlock:block];
@@ -154,7 +161,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (void)lj_enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         [self.lj_backingStore enumerateObjectsWithOptions:opts usingBlock:block];
     } else {
         [self lj_enumerateObjectsWithOptions:opts usingBlock:block];
@@ -165,7 +172,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
                              options:(NSEnumerationOptions)opts
                           usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
         [self.lj_backingStore enumerateObjectsAtIndexes:s options:opts usingBlock:block];
     } else {
         [self lj_enumerateObjectsAtIndexes:s options:opts usingBlock:block];
@@ -174,15 +181,33 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFe
 
 - (NSUInteger)lj_countOfAssetsWithMediaType:(PHAssetMediaType)mediaType {
     
-    if (self.lj_asyncFile) {
+    if (self.lj_asyncFiles) {
+        
+        NSAssert(NO, @"Not implemented yet");
+        
+        return 0;
+
+        // TODO:
+        /*
         BOOL count = 0;
         LJAsyncFileMediaType type = (LJAsyncFileMediaType)mediaType;
         for (id<LJAsyncFile> file in self.lj_backingStore) {
             if (type == file.mediaType) count++;
         }
-        return count;
+        return count;*/
     } else {
         return [self lj_countOfAssetsWithMediaType:mediaType];
+    }
+}
+
+- (NSUInteger)lj_countByEnumeratingWithState:(NSFastEnumerationState *)state
+                                     objects:(id __unsafe_unretained *)stackbuf
+                                       count:(NSUInteger)len {
+    
+    if (self.lj_asyncFiles) {
+        return [self.lj_backingStore countByEnumeratingWithState:state objects:stackbuf count:len];
+    } else {
+        return [self lj_countByEnumeratingWithState:state objects:stackbuf count:len];
     }
 }
 

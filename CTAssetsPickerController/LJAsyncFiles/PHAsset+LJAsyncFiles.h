@@ -7,7 +7,10 @@
 //
 
 #import <Photos/Photos.h>
+#import "LJAsyncFile.h"
 
-@interface PHAsset (LJAsyncFiles)
+@interface PHAsset (LJAsyncFiles) <LJAsyncFile>
+
+@property (assign) BOOL lj_asyncFile;
 
 @end

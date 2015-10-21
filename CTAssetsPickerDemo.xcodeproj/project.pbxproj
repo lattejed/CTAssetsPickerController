@@ -12,6 +12,8 @@
 		344CCCA81BD7443C00B8D69B /* LJAsyncFilesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 344CCCA71BD7443C00B8D69B /* LJAsyncFilesManager.m */; };
 		344CCCAC1BD7486C00B8D69B /* PHFetchResult+LJAsyncFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 344CCCAB1BD7486C00B8D69B /* PHFetchResult+LJAsyncFiles.m */; };
 		344CCCAF1BD748C600B8D69B /* NSObject+LJAsyncFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 344CCCAE1BD748C600B8D69B /* NSObject+LJAsyncFiles.m */; };
+		344CCCB21BD7699500B8D69B /* PHImageManager+LJAsyncFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 344CCCB11BD7699500B8D69B /* PHImageManager+LJAsyncFiles.m */; };
+		344CCCB51BD77D1D00B8D69B /* PHAssetCollection+LJAsyncFIles.m in Sources */ = {isa = PBXBuildFile; fileRef = 344CCCB41BD77D1D00B8D69B /* PHAssetCollection+LJAsyncFIles.m */; };
 		363F8D0A685BF86C60D06D49 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1B2FBB7FD634FB543BB7BB6 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		AD0786D91B428313003C8863 /* CTBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0786D81B428313003C8863 /* CTBasicViewController.m */; };
 		AD0786DF1B42864F003C8863 /* CTSelectedAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0786DE1B42864F003C8863 /* CTSelectedAssetsViewController.m */; };
@@ -48,6 +50,10 @@
 		344CCCAB1BD7486C00B8D69B /* PHFetchResult+LJAsyncFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHFetchResult+LJAsyncFiles.m"; sourceTree = "<group>"; };
 		344CCCAD1BD748C600B8D69B /* NSObject+LJAsyncFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LJAsyncFiles.h"; sourceTree = "<group>"; };
 		344CCCAE1BD748C600B8D69B /* NSObject+LJAsyncFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LJAsyncFiles.m"; sourceTree = "<group>"; };
+		344CCCB01BD7699500B8D69B /* PHImageManager+LJAsyncFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHImageManager+LJAsyncFiles.h"; sourceTree = "<group>"; };
+		344CCCB11BD7699500B8D69B /* PHImageManager+LJAsyncFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHImageManager+LJAsyncFiles.m"; sourceTree = "<group>"; };
+		344CCCB31BD77D1D00B8D69B /* PHAssetCollection+LJAsyncFIles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHAssetCollection+LJAsyncFIles.h"; sourceTree = "<group>"; };
+		344CCCB41BD77D1D00B8D69B /* PHAssetCollection+LJAsyncFIles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHAssetCollection+LJAsyncFIles.m"; sourceTree = "<group>"; };
 		408BD0916F5C7C71C93D0E93 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A741BBA21B5F7A8C00ED3D7B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A741BBA31B5F7A8C00ED3D7B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/CTAssetsPicker.strings; sourceTree = "<group>"; };
@@ -218,8 +224,12 @@
 				344CCCA71BD7443C00B8D69B /* LJAsyncFilesManager.m */,
 				344CCCA31BD72EDB00B8D69B /* PHAsset+LJAsyncFiles.h */,
 				344CCCA41BD72EDB00B8D69B /* PHAsset+LJAsyncFiles.m */,
+				344CCCB31BD77D1D00B8D69B /* PHAssetCollection+LJAsyncFIles.h */,
+				344CCCB41BD77D1D00B8D69B /* PHAssetCollection+LJAsyncFIles.m */,
 				344CCCAA1BD7486C00B8D69B /* PHFetchResult+LJAsyncFiles.h */,
 				344CCCAB1BD7486C00B8D69B /* PHFetchResult+LJAsyncFiles.m */,
+				344CCCB01BD7699500B8D69B /* PHImageManager+LJAsyncFiles.h */,
+				344CCCB11BD7699500B8D69B /* PHImageManager+LJAsyncFiles.m */,
 			);
 			name = LJAsyncFiles;
 			path = CTAssetsPickerController/LJAsyncFiles;
@@ -571,9 +581,11 @@
 				AD4B06C81B428EEF00D99C5A /* CTiCloudAlbumsViewController.m in Sources */,
 				344CCCA01BD62B2100B8D69B /* LJAsyncFilesViewController.m in Sources */,
 				AD0786E21B428A73003C8863 /* CTDefaultAlbumViewController.m in Sources */,
+				344CCCB51BD77D1D00B8D69B /* PHAssetCollection+LJAsyncFIles.m in Sources */,
 				344CCCA81BD7443C00B8D69B /* LJAsyncFilesManager.m in Sources */,
 				AD0786D91B428313003C8863 /* CTBasicViewController.m in Sources */,
 				ADA0730D1B4625AA009FB7C7 /* CTUITweaksViewController.m in Sources */,
+				344CCCB21BD7699500B8D69B /* PHImageManager+LJAsyncFiles.m in Sources */,
 				AD18AFD71BCC9BA9008B507D /* CTSelectionOrderViewController.m in Sources */,
 				ADFE238B1B46868100E44353 /* CTApperanceViewController.m in Sources */,
 				ADE2713C1ACBA6BA0090EFB1 /* NSIndexSet+CTAssetsPickerController.m in Sources */,

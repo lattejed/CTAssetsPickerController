@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, LJAsyncFileMediaType) {
     LJAsyncFileMediaTypeImage   = 1,
     LJAsyncFileMediaTypeVideo   = 2,
     LJAsyncFileMediaTypeAudio   = 3,
-}
+};
 
 @protocol LJAsyncFile <NSObject>
 
