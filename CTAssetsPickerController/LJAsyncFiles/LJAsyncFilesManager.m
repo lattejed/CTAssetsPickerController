@@ -10,6 +10,8 @@
 
 @implementation LJAsyncFilesManager
 
++ (BOOL)useAsyncFiles { return YES; }
+
 + (instancetype)sharedManager {
     static LJAsyncFilesManager* sharedManager = nil;
     static dispatch_once_t onceToken;
@@ -19,8 +21,8 @@
     return sharedManager;
 }
 
-- (BOOL)hasAsyncFiles {
-    return YES; // TODO:
+- (NSArray<id<LJAsyncFile>> *)asyncFiles {
+    return nil;
 }
 
 @end

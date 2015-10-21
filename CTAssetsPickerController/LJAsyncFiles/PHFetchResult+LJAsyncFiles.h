@@ -8,6 +8,12 @@
 
 #import <Photos/Photos.h>
 
+@protocol LJAsyncFile;
+
 @interface PHFetchResult (LJAsyncFiles)
+
+@property (assign) BOOL lj_asyncFile;
+
+- (NSMutableArray<id<LJAsyncFile>> *)lj_backingStore;
 
 @end

@@ -12,9 +12,8 @@
 
 @interface LJAsyncFilesManager : NSObject
 
++ (BOOL)useAsyncFiles;
 + (instancetype)sharedManager;
-
-- (BOOL)hasAsyncFiles;
 - (NSArray<id<LJAsyncFile>> *)asyncFiles;
 
 @end

@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, LJAsyncFileMediaType) {
+    LJAsyncFileMediaTypeUnknown = 0,
+    LJAsyncFileMediaTypeImage   = 1,
+    LJAsyncFileMediaTypeVideo   = 2,
+    LJAsyncFileMediaTypeAudio   = 3,
+}
+
 @protocol LJAsyncFile <NSObject>
+
+@property (assign) BOOL mediaType;
 
 @end

@@ -41,10 +41,6 @@
     
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if ([[LJAsyncFilesManager sharedManager] hasAsyncFiles]) {
-        //return @[];
-    }
-    
     return [self lj_fetchAssetsWithOptions:options];
 }
 

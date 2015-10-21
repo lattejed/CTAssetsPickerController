@@ -211,6 +211,8 @@
 		344CCCA21BD72E0D00B8D69B /* LJAsyncFiles */ = {
 			isa = PBXGroup;
 			children = (
+				344CCCAD1BD748C600B8D69B /* NSObject+LJAsyncFiles.h */,
+				344CCCAE1BD748C600B8D69B /* NSObject+LJAsyncFiles.m */,
 				344CCCA91BD745AC00B8D69B /* LJAsyncFile.h */,
 				344CCCA61BD7443C00B8D69B /* LJAsyncFilesManager.h */,
 				344CCCA71BD7443C00B8D69B /* LJAsyncFilesManager.m */,
@@ -218,8 +220,6 @@
 				344CCCA41BD72EDB00B8D69B /* PHAsset+LJAsyncFiles.m */,
 				344CCCAA1BD7486C00B8D69B /* PHFetchResult+LJAsyncFiles.h */,
 				344CCCAB1BD7486C00B8D69B /* PHFetchResult+LJAsyncFiles.m */,
-				344CCCAD1BD748C600B8D69B /* NSObject+LJAsyncFiles.h */,
-				344CCCAE1BD748C600B8D69B /* NSObject+LJAsyncFiles.m */,
 			);
 			name = LJAsyncFiles;
 			path = CTAssetsPickerController/LJAsyncFiles;

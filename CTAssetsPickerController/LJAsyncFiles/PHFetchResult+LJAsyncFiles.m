@@ -8,6 +8,12 @@
 
 #import "PHFetchResult+LJAsyncFiles.h"
 #import "NSObject+LJAsyncFiles.h"
+#import <objc/runtime.h>
+#import "LJAsyncFilesManager.h"
+#import "LJAsyncFile.h"
+
+static void* const kPHFetchResult_LJAsyncFiles_BackingStore     = (void *)&kPHFetchResult_LJAsyncFiles_BackingStore;
+static void* const kPHFetchResult_LJAsyncFiles_AsyncFile        = (void *)&kPHFetchResult_LJAsyncFiles_AsyncFile;
 
 @implementation PHFetchResult (LJAsyncFiles)
 
@@ -33,71 +39,151 @@
     });
 }
 
+#pragma mark -
+
+- (BOOL)lj_asyncFile {
+    NSNumber* val = objc_getAssociatedObject(self, kPHFetchResult_LJAsyncFiles_AsyncFile);
+    return val != nil ? [val boolValue] : NO;
+}
+
+- (void)setLj_asyncFile:(BOOL)lj_asyncFile {
+    NSNumber* val = [NSNumber numberWithBool:lj_asyncFile];
+    objc_setAssociatedObject(self, kPHFetchResult_LJAsyncFiles_AsyncFile, val, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableArray<id<LJAsyncFile>> *)lj_backingStore {
+    NSMutableArray* store = objc_getAssociatedObject(self, kPHFetchResult_LJAsyncFiles_BackingStore);
+    if (!store) {
+        store = [NSMutableArray array];
+        objc_setAssociatedObject(self, kPHFetchResult_LJAsyncFiles_BackingStore, store, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return store;
+}
+
 #pragma mark - Swizzled Instance Methods
 
 - (NSUInteger)lj_count {
-
-    return [self lj_count];
+    
+    if (self.lj_asyncFile) {
+        return [self.lj_backingStore count];
+    } else {
+        return [self lj_count];
+    }
 }
 
 - (id)lj_objectAtIndex:(NSUInteger)index {
-
-    return [self lj_objectAtIndex:index];
+    
+    if (self.lj_asyncFile) {
+        return [self.lj_backingStore objectAtIndex:index];
+    } else {
+        return [self lj_objectAtIndex:index];
+    }
 }
 
 - (id)lj_objectAtIndexedSubscript:(NSUInteger)idx {
-
-    return [self lj_objectAtIndexedSubscript:idx];
+    
+    if (self.lj_asyncFile) {
+        return [self.lj_backingStore objectAtIndexedSubscript:idx];
+    } else {
+        return [self lj_objectAtIndexedSubscript:idx];
+    }
 }
 
 - (BOOL)lj_containsObject:(id)anObject {
     
-    return [self lj_containsObject:anObject];
+    if (self.lj_asyncFile) {
+        return [self.lj_backingStore containsObject:anObject];
+    } else {
+        return [self lj_containsObject:anObject];
+    }
 }
 
 - (NSUInteger)lj_indexOfObject:(id)anObject {
     
-    return [self lj_indexOfObject:anObject];
+    if (self.lj_asyncFile) {
+        return [self.lj_backingStore indexOfObject:anObject];
+    } else {
+        return [self lj_indexOfObject:anObject];
+    }
 }
 
 - (NSUInteger)lj_indexOfObject:(id)anObject inRange:(NSRange)range {
     
-    return [self lj_indexOfObject:anObject inRange:range];
+    if (self.lj_asyncFile) {
+        return [self.lj_backingStore indexOfObject:anObject inRange:range];
+    } else {
+        return [self lj_indexOfObject:anObject inRange:range];
+    }
 }
 
 - (id)lj_firstObject {
-
-    return [self lj_firstObject];
+    
+    if (self.lj_asyncFile) {
+        return [self.lj_backingStore firstObject];
+    } else {
+        return [self lj_firstObject];
+    }
 }
 
 - (id)lj_lastObject {
     
-    return [self lj_lastObject];
+    if (self.lj_asyncFile) {
+        return [self.lj_backingStore lastObject];
+    } else {
+        return [self lj_lastObject];
+    }
 }
 
 - (NSArray<id> *)lj_objectsAtIndexes:(NSIndexSet *)indexes {
     
-    return [self lj_objectsAtIndexes:indexes];
+    if (self.lj_asyncFile) {
+        return [self.lj_backingStore objectsAtIndexes:indexes];
+    } else {
+        return [self lj_objectsAtIndexes:indexes];
+    }
 }
 
 - (void)lj_enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
-
-    [self lj_enumerateObjectsUsingBlock:block];
+    
+    if (self.lj_asyncFile) {
+        [self.lj_backingStore enumerateObjectsUsingBlock:block];
+    } else {
+        [self lj_enumerateObjectsUsingBlock:block];
+    }
 }
 
 - (void)lj_enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
-
-    [self lj_enumerateObjectsWithOptions:opts usingBlock:block];
+    
+    if (self.lj_asyncFile) {
+        [self.lj_backingStore enumerateObjectsWithOptions:opts usingBlock:block];
+    } else {
+        [self lj_enumerateObjectsWithOptions:opts usingBlock:block];
+    }
 }
+
 - (void)lj_enumerateObjectsAtIndexes:(NSIndexSet *)s
                              options:(NSEnumerationOptions)opts
                           usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
-
+    
+    if (self.lj_asyncFile) {
+        [self.lj_backingStore enumerateObjectsAtIndexes:s options:opts usingBlock:block];
+    } else {
+        [self lj_enumerateObjectsAtIndexes:s options:opts usingBlock:block];
+    }
 }
 
 - (NSUInteger)lj_countOfAssetsWithMediaType:(PHAssetMediaType)mediaType {
-
-    return [self lj_countOfAssetsWithMediaType:mediaType];
+    
+    if (self.lj_asyncFile) {
+        BOOL count = 0;
+        LJAsyncFileMediaType type = (LJAsyncFileMediaType)mediaType;
+        for (id<LJAsyncFile> file in self.lj_backingStore) {
+            if (type == file.mediaType) count++;
+        }
+        return count;
+    } else {
+        return [self lj_countOfAssetsWithMediaType:mediaType];
+    }
 }
 
 @end
