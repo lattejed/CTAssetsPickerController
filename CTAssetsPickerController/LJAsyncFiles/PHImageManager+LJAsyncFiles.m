@@ -19,7 +19,7 @@
         
         [self lj_swizzleMethodNamesForInstance:@[
                                                  @"requestImageForAsset:targetSize:contentMode:options:resultHandler:",
-                                                 @"requestImageDataForAsset:options:resultHandler:",
+                                                 //@"requestImageDataForAsset:options:resultHandler:",
                                                  @"cancelImageRequest:",
                                                  //@"requestLivePhotoForAsset:targetSize:contentMode:options:resultHandler:",
                                                  //@"requestPlayerItemForVideo:options:resultHandler:",
@@ -48,20 +48,16 @@
     }
 }
 
+/*
 - (PHImageRequestID)lj_requestImageDataForAsset:(PHAsset *)asset
                                         options:(nullable PHImageRequestOptions *)options
                                   resultHandler:(void(^)(NSData *__nullable imageData, NSString *__nullable dataUTI, UIImageOrientation orientation, NSDictionary *__nullable info))resultHandler {
     if (asset.lj_asyncFile != nil) {
-        
-        // TODO:
-        resultHandler(UIImageJPEGRepresentation([UIImage imageNamed:@"test.jpeg"], 1), nil, UIImageOrientationUp, nil);
-        
-        //
         return PHInvalidImageRequestID;
     } else {
         return [self lj_requestImageDataForAsset:asset options:options resultHandler:resultHandler];
     }
-}
+}*/
 
 - (void)lj_cancelImageRequest:(PHImageRequestID)requestID {
     if (requestID != PHInvalidImageRequestID) {
