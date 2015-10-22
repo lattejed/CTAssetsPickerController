@@ -60,8 +60,8 @@
 		344CCCB91BD89B9D00B8D69B /* test.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpeg; sourceTree = "<group>"; };
 		344CCCBB1BD89F2000B8D69B /* PHImageManager+LJAsyncFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHImageManager+LJAsyncFiles.h"; sourceTree = "<group>"; };
 		344CCCBC1BD89F2000B8D69B /* PHImageManager+LJAsyncFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHImageManager+LJAsyncFiles.m"; sourceTree = "<group>"; };
-		344CCCBE1BD8D85600B8D69B /* LJTempAsyncFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LJTempAsyncFile.h; path = ../../CTAssetsPickerController/LJAsyncFiles/LJTempAsyncFile.h; sourceTree = "<group>"; };
-		344CCCBF1BD8D85600B8D69B /* LJTempAsyncFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LJTempAsyncFile.m; path = ../../CTAssetsPickerController/LJAsyncFiles/LJTempAsyncFile.m; sourceTree = "<group>"; };
+		344CCCBE1BD8D85600B8D69B /* LJTempAsyncFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LJTempAsyncFile.h; path = ../../CTAssetsPickerController/LJTempAsyncFile.h; sourceTree = "<group>"; };
+		344CCCBF1BD8D85600B8D69B /* LJTempAsyncFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LJTempAsyncFile.m; path = ../../CTAssetsPickerController/LJTempAsyncFile.m; sourceTree = "<group>"; };
 		408BD0916F5C7C71C93D0E93 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A741BBA21B5F7A8C00ED3D7B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A741BBA31B5F7A8C00ED3D7B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/CTAssetsPicker.strings; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 				344CCCB71BD8887900B8D69B /* PHCachingImageManager+LJAsyncFiles.m */,
 			);
 			name = LJAsyncFiles;
-			path = CTAssetsPickerController/LJAsyncFiles;
+			path = CTAssetsPickerController;
 			sourceTree = "<group>";
 		};
 		864FC91FDA0029821FBB0300 /* Pods */ = {
