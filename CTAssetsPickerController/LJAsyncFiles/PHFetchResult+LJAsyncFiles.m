@@ -183,7 +183,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFiles       = (void *)&kPHFe
     
     if (self.lj_asyncFiles) {
         
-        NSAssert(NO, @"Not implemented yet");
+        //NSAssert(NO, @"Not implemented yet");
         
         return 0;
 

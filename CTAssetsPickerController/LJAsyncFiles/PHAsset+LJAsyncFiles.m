@@ -12,7 +12,8 @@
 #import "LJAsyncFilesManager.h"
 #import "PHFetchResult+LJAsyncFiles.h"
 
-static void* const kPHAsset_LJAsyncFiles_AsyncFile = (void *)&kPHAsset_LJAsyncFiles_AsyncFile;
+static void* const kPHAsset_LJAsyncFiles_AsyncFile  = (void *)&kPHAsset_LJAsyncFiles_AsyncFile;
+static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncFiles_UUID;
 
 @implementation PHAsset (LJAsyncFiles)
 
@@ -31,6 +32,8 @@ static void* const kPHAsset_LJAsyncFiles_AsyncFile = (void *)&kPHAsset_LJAsyncFi
                                               ]];
         
         [self lj_swizzleMethodNamesForInstance:@[
+                                                 @"isEqual:",
+                                                 @"hash",
                                                  @"mediaType",
                                                  @"mediaSubtypes"
                                                  ]];
@@ -55,6 +58,14 @@ static void* const kPHAsset_LJAsyncFiles_AsyncFile = (void *)&kPHAsset_LJAsyncFi
     objc_setAssociatedObject(self, kPHAsset_LJAsyncFiles_AsyncFile, val, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (NSString *)lj_UUID {
+    return objc_getAssociatedObject(self, kPHAsset_LJAsyncFiles_UUID);
+}
+
+- (void)setLj_UUID:(NSString *)UUID {
+    objc_setAssociatedObject(self, kPHAsset_LJAsyncFiles_UUID, UUID, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 #define NSLog(...)
 
 #pragma mark - Swizzled Class Methods
@@ -71,6 +82,7 @@ static void* const kPHAsset_LJAsyncFiles_AsyncFile = (void *)&kPHAsset_LJAsyncFi
         for (int i=0; i<10; i++) {
             PHAsset* asset = [PHAsset new];
             asset.lj_asyncFile = YES;
+            asset.lj_UUID = [[NSUUID UUID] UUIDString];
             [result lj_addObject:asset];
         }
         return result;
@@ -114,6 +126,7 @@ static void* const kPHAsset_LJAsyncFiles_AsyncFile = (void *)&kPHAsset_LJAsyncFi
         for (int i=0; i<10; i++) {
             PHAsset* asset = [PHAsset new];
             asset.lj_asyncFile = YES;
+            asset.lj_UUID = [[NSUUID UUID] UUIDString];
             [result lj_addObject:asset];
         }
         return result;
@@ -140,18 +153,41 @@ static void* const kPHAsset_LJAsyncFiles_AsyncFile = (void *)&kPHAsset_LJAsyncFi
 
 #pragma mark - Swizzled Instance Methods
 
-- (PHAssetMediaType *)lj_mediaType {
-    
-    //NSLog(@"%s", __PRETTY_FUNCTION__);
+- (BOOL)lj_isEqual:(id)object {
 
-    return [self lj_mediaType];
+    if (self.lj_asyncFile) {
+        PHAsset* asset = object;
+        return [self.lj_UUID isEqual:[asset lj_UUID]];
+    } else {
+        return [self lj_isEqual:object];
+    }
+}
+
+- (BOOL)lj_hash {
+    
+    if (self.lj_asyncFile) {
+        return [self.lj_UUID hash];
+    } else {
+        return [self lj_hash];
+    }
+}
+
+- (PHAssetMediaType)lj_mediaType {
+    
+    if (self.lj_asyncFile) {
+        return PHAssetMediaTypeImage; // TODO:
+    } else {
+        return [self lj_mediaType];
+    }
 }
 
 - (PHAssetMediaSubtype)lj_mediaSubtypes {
     
-    //NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    return [self lj_mediaSubtypes];
+    if (self.lj_asyncFile) {
+        return PHAssetMediaSubtypeNone; // TODO:
+    } else {
+        return [self lj_mediaSubtypes];
+    }
 }
 
 @end

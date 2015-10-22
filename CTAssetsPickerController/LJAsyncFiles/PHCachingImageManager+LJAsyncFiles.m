@@ -1,16 +1,16 @@
 //
-//  PHImageManager+LJAsyncFiles.m
+//  PHCachingImageManager+LJAsyncFiles.m
 //  CTAssetsPickerDemo
 //
-//  Created by Matthew Smith on 10/21/15.
+//  Created by Matthew Smith on 10/22/15.
 //  Copyright © 2015 Clement T. All rights reserved.
 //
 
-#import "PHImageManager+LJAsyncFiles.h"
+#import "PHCachingImageManager+LJAsyncFiles.h"
 #import "NSObject+LJAsyncFiles.h"
 #import "PHAsset+LJAsyncFiles.h"
 
-@implementation PHImageManager (LJAsyncFiles)
+@implementation PHCachingImageManager (LJAsyncFiles)
 
 + (void)load {
     static dispatch_once_t onceToken;
@@ -23,7 +23,12 @@
                                                  @"requestLivePhotoForAsset:targetSize:contentMode:options:resultHandler:",
                                                  @"requestPlayerItemForVideo:options:resultHandler:",
                                                  @"requestExportSessionForVideo:options:exportPreset:resultHandler:",
-                                                 @"requestAVAssetForVideo:options:resultHandler:"
+                                                 @"requestAVAssetForVideo:options:resultHandler:",
+                                                 
+                                                 // PHCachingImageManager
+                                                 @"startCachingImagesForAssets:targetSize:contentMode:options:",
+                                                 @"stopCachingImagesForAssets:targetSize:contentMode:options:",
+                                                 @"stopCachingImagesForAllAssets"
                                                  ]];
     });
 }
@@ -35,9 +40,9 @@
                                     options:(nullable PHImageRequestOptions *)options
                               resultHandler:(void (^)(UIImage *__nullable result, NSDictionary *__nullable info))resultHandler {
     //NSLog(@"%s", __PRETTY_FUNCTION__);
-
-    if (asset.lj_asyncFile) {
     
+    if (asset.lj_asyncFile) {
+        
         //
         return PHInvalidImageRequestID;
     } else {
@@ -53,7 +58,7 @@
                                         options:(nullable PHImageRequestOptions *)options
                                   resultHandler:(void(^)(NSData *__nullable imageData, NSString *__nullable dataUTI, UIImageOrientation orientation, NSDictionary *__nullable info))resultHandler {
     //NSLog(@"%s", __PRETTY_FUNCTION__);
-
+    
     if (asset.lj_asyncFile) {
         
         //
@@ -65,7 +70,7 @@
 
 - (void)lj_cancelImageRequest:(PHImageRequestID)requestID {
     //NSLog(@"%s", __PRETTY_FUNCTION__);
-
+    
     if (requestID != PHInvalidImageRequestID) {
         [self lj_cancelImageRequest:requestID];
     }
@@ -77,7 +82,7 @@
                                         options:(nullable PHLivePhotoRequestOptions *)options
                                   resultHandler:(void (^)(PHLivePhoto *__nullable livePhoto, NSDictionary *__nullable info))resultHandler {
     //NSLog(@"%s", __PRETTY_FUNCTION__);
-
+    
     if (asset.lj_asyncFile) {
         
         return PHInvalidImageRequestID;
@@ -107,7 +112,7 @@
                                        exportPreset:(NSString *)exportPreset
                                       resultHandler:(void (^)(AVAssetExportSession *__nullable exportSession, NSDictionary *__nullable info))resultHandler {
     //NSLog(@"%s", __PRETTY_FUNCTION__);
-
+    
     if (asset.lj_asyncFile) {
         
         //
@@ -121,7 +126,7 @@
                                       options:(nullable PHVideoRequestOptions *)options
                                 resultHandler:(void (^)(AVAsset *__nullable asset, AVAudioMix *__nullable audioMix, NSDictionary *__nullable info))resultHandler {
     //NSLog(@"%s", __PRETTY_FUNCTION__);
-
+    
     if (asset.lj_asyncFile) {
         
         //
@@ -129,6 +134,31 @@
     } else {
         return [self lj_requestAVAssetForVideo:asset options:options resultHandler:resultHandler];
     }
+}
+
+- (void)lj_startCachingImagesForAssets:(NSArray<PHAsset *> *)assets
+                            targetSize:(CGSize)targetSize
+                           contentMode:(PHImageContentMode)contentMode
+                               options:(PHImageRequestOptions *)options {
+    // TODO:
+    
+    NSLog(@"HERE");
+}
+
+- (void)lj_stopCachingImagesForAssets:(NSArray<PHAsset *> *)assets
+                           targetSize:(CGSize)targetSize
+                          contentMode:(PHImageContentMode)contentMode
+                              options:(PHImageRequestOptions *)options {
+    // TODO:
+    
+    NSLog(@"HERE");
+}
+
+- (void)lj_stopCachingImagesForAllAssets {
+    
+    // TODO:
+    
+    NSLog(@"HERE");
 }
 
 @end

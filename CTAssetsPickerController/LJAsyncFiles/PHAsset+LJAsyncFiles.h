@@ -12,5 +12,6 @@
 @interface PHAsset (LJAsyncFiles) <LJAsyncFile>
 
 @property (assign) BOOL lj_asyncFile;
+@property (copy) NSString* lj_UUID;
 
 @end
