@@ -15,8 +15,13 @@ typedef NS_ENUM(NSInteger, LJAsyncFileMediaType) {
     LJAsyncFileMediaTypeAudio   = 3,
 };
 
+static const NSInteger LJAssetCollectionSubtypeAsyncFiles = 10001; // TODO: Move this
+
 @protocol LJAsyncFile <NSObject>
 
 @property (assign) BOOL mediaType;
+
+//- (void)imageWithBlock:(void(^)(UIImage* image))block;
+//- (void)imageWithBlock:(void(^)(UIImage* image))block; // TODO: Video
 
 @end

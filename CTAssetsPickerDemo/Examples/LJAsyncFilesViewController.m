@@ -8,6 +8,8 @@
 
 #import "LJAsyncFilesViewController.h"
 
+#import "LJAsyncFile.h"
+
 @interface LJAsyncFilesViewController ()
 
 @end
@@ -21,6 +23,8 @@
             
             // init picker
             CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
+            
+            picker.assetCollectionSubtypes = @[@(LJAssetCollectionSubtypeAsyncFiles)];
             
             // set delegate
             picker.delegate = self;
