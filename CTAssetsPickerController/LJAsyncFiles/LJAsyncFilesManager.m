@@ -23,8 +23,4 @@
     return [[self sharedManager] mode];
 }
 
-- (NSArray<id<LJAsyncFile>> *)asyncFiles {
-    return nil;
-}
-
 @end

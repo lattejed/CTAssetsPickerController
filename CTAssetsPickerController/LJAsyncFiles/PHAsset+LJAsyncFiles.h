@@ -7,11 +7,14 @@
 //
 
 #import <Photos/Photos.h>
-#import "LJAsyncFile.h"
 
-@interface PHAsset (LJAsyncFiles) <LJAsyncFile>
+@protocol LJAsyncFile;
 
-@property (assign) BOOL lj_asyncFile;
-@property (copy) NSString* lj_UUID;
+@interface PHAsset (LJAsyncFiles)
+
+@property (readonly) id<LJAsyncFile> lj_asyncFile;
+@property (readonly) NSString* lj_UUID;
+
++ (instancetype)lj_assetWithAsyncFile:(id<LJAsyncFile>)file;
 
 @end

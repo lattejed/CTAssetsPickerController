@@ -9,6 +9,7 @@
 #import "PHCachingImageManager+LJAsyncFiles.h"
 #import "NSObject+LJAsyncFiles.h"
 #import "PHAsset+LJAsyncFiles.h"
+#import "LJAsyncFilesManager.h"
 
 @implementation PHCachingImageManager (LJAsyncFiles)
 
@@ -28,25 +29,42 @@
                             targetSize:(CGSize)targetSize
                            contentMode:(PHImageContentMode)contentMode
                                options:(PHImageRequestOptions *)options {
-    // TODO:
     
-    NSLog(@"HERE");
+    LJAsyncFilesManagerMode mode = [LJAsyncFilesManager mode];
+    if (mode == LJAssetCollectionSubtypeAsyncFiles) {
+        // No op
+    } else if (mode == LJAsyncFilesManagerModeCombined) {
+        NSAssert(NO, @"Not implemented yet");
+    } else {
+        [self lj_startCachingImagesForAssets:assets targetSize:targetSize contentMode:contentMode options:options];
+    }
 }
 
 - (void)lj_stopCachingImagesForAssets:(NSArray<PHAsset *> *)assets
                            targetSize:(CGSize)targetSize
                           contentMode:(PHImageContentMode)contentMode
                               options:(PHImageRequestOptions *)options {
-    // TODO:
     
-    NSLog(@"HERE");
+    LJAsyncFilesManagerMode mode = [LJAsyncFilesManager mode];
+    if (mode == LJAssetCollectionSubtypeAsyncFiles) {
+        // No op
+    } else if (mode == LJAsyncFilesManagerModeCombined) {
+        NSAssert(NO, @"Not implemented yet");
+    } else {
+        [self lj_stopCachingImagesForAssets:assets targetSize:targetSize contentMode:contentMode options:options];
+    }
 }
 
 - (void)lj_stopCachingImagesForAllAssets {
     
-    // TODO:
-    
-    NSLog(@"HERE");
+    LJAsyncFilesManagerMode mode = [LJAsyncFilesManager mode];
+    if (mode == LJAssetCollectionSubtypeAsyncFiles) {
+        // No op
+    } else if (mode == LJAsyncFilesManagerModeCombined) {
+        NSAssert(NO, @"Not implemented yet");
+    } else {
+        [self lj_stopCachingImagesForAllAssets];
+    }
 }
 
 @end

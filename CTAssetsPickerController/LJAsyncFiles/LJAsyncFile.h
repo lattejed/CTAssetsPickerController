@@ -17,11 +17,11 @@ typedef NS_ENUM(NSInteger, LJAsyncFileMediaType) {
 
 @protocol LJAsyncFile <NSObject>
 
-@property (assign) BOOL lj_mediaType; // TODO:
+@required
+@property (assign, readonly) LJAsyncFileMediaType mediaType;
+@property (assign, readonly) NSUInteger pixelWidth;
+@property (assign, readonly) NSUInteger pixelHeight;
 
-// TODO: pixelWidth, pixelHeight, mediaSubtype
-
-//- (void)imageWithBlock:(void(^)(UIImage* image))block;
-//- (void)imageWithBlock:(void(^)(UIImage* image))block; // TODO: Video
+- (void)imageForSize:(CGSize)size block:(void(^)(UIImage* image, NSDictionary* info))block;
 
 @end

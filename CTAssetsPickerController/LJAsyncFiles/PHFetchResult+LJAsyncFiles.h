@@ -10,8 +10,8 @@
 
 @interface PHFetchResult (LJAsyncFiles)
 
-@property (assign) BOOL lj_asyncFiles;
+@property (assign, readonly) BOOL lj_hasAsyncFiles;
 
-- (void)lj_addObject:(id)object;
++ (instancetype)lj_fetchResultsWithResults:(NSArray *)results;
 
 @end

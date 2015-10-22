@@ -21,10 +21,9 @@ static const NSInteger LJAssetCollectionSubtypeAsyncFiles = 10001; // TODO:
 @interface LJAsyncFilesManager : NSObject
 
 @property (assign) LJAsyncFilesManagerMode mode;
+@property NSArray<id<LJAsyncFile>>* asyncFiles;
 
 + (instancetype)sharedManager;
 + (LJAsyncFilesManagerMode)mode;
-
-- (NSArray<id<LJAsyncFile>> *)asyncFiles;
 
 @end

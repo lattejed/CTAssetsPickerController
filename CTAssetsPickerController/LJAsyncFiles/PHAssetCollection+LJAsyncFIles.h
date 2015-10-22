@@ -10,7 +10,9 @@
 
 @interface PHAssetCollection (LJAsyncFiles)
 
-@property (copy) NSString* lj_UUID;
-@property (assign) BOOL lj_asyncFiles;
+@property (assign, readonly) BOOL lj_isAsyncFileCollection;
+@property (readonly) NSString* lj_UUID;
+
++ (instancetype)lj_asyncFileAssetCollection;
 
 @end

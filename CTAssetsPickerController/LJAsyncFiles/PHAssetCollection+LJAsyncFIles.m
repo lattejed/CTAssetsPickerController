@@ -43,35 +43,28 @@ static void* const kPHAssetCollection_LJAsyncFiles_AsyncFile    = (void *)&kPHAs
 
 #pragma mark - 
 
-+ (PHFetchResult<PHAssetCollection *> *)lj_defaultFetchResults {
-    
++ (instancetype)lj_asyncFileAssetCollection {
     PHAssetCollection* collection = [PHAssetCollection new];
-    collection.lj_UUID = [[NSUUID UUID] UUIDString];
-    collection.lj_asyncFiles = YES;
     
-    PHFetchResult* results = [PHFetchResult new];
-    results.lj_asyncFiles = YES;
-    [results lj_addObject:collection];
-    
-    return results;
+    NSString* UUID = [[NSUUID UUID] UUIDString];
+    objc_setAssociatedObject(collection, kPHAssetCollection_LJAsyncFiles_UUID, UUID, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(collection, kPHAssetCollection_LJAsyncFiles_AsyncFile, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+    return collection;
+}
+
+
++ (PHFetchResult<PHAssetCollection *> *)lj_asyncFileAssetCollectionResults {
+    return [PHFetchResult lj_fetchResultsWithResults:@[[self lj_asyncFileAssetCollection]]];
 }
 
 - (NSString *)lj_UUID {
     return objc_getAssociatedObject(self, kPHAssetCollection_LJAsyncFiles_UUID);
 }
 
-- (void)setLj_UUID:(NSString *)UUID {
-    objc_setAssociatedObject(self, kPHAssetCollection_LJAsyncFiles_UUID, UUID, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)lj_asyncFiles {
+- (BOOL)lj_isAsyncFileCollection {
     NSNumber* val = objc_getAssociatedObject(self, kPHAssetCollection_LJAsyncFiles_AsyncFile);
     return val != nil ? [val boolValue] : NO;
-}
-
-- (void)setLj_asyncFiles:(BOOL)lj_asyncFiles {
-    NSNumber* val = [NSNumber numberWithBool:lj_asyncFiles];
-    objc_setAssociatedObject(self, kPHAssetCollection_LJAsyncFiles_AsyncFile, val, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - Swizzled Class Methods
@@ -86,7 +79,7 @@ static void* const kPHAssetCollection_LJAsyncFiles_AsyncFile    = (void *)&kPHAs
                                                                  subtype:(PHAssetCollectionSubtype)subtype
                                                                  options:(nullable PHFetchOptions *)options {
     if (subtype == LJAssetCollectionSubtypeAsyncFiles) {
-        return [self lj_defaultFetchResults];
+        return [self lj_asyncFileAssetCollectionResults];
     } else {
         return [self lj_fetchAssetCollectionsWithType:type subtype:subtype options:options];
     }
@@ -96,7 +89,7 @@ static void* const kPHAssetCollection_LJAsyncFiles_AsyncFile    = (void *)&kPHAs
                                                                        withType:(PHAssetCollectionType)type
                                                                         options:(nullable PHFetchOptions *)options {
     if (asset.lj_asyncFile) {
-        return [self lj_defaultFetchResults];
+        return [self lj_asyncFileAssetCollectionResults];
     } else {
         return [self lj_fetchAssetCollectionsContainingAsset:asset withType:type options:options];
     }
@@ -112,7 +105,7 @@ static void* const kPHAssetCollection_LJAsyncFiles_AsyncFile    = (void *)&kPHAs
 
 - (NSUInteger)lj_estimatedAssetCount {
     
-    if (self.lj_asyncFiles) {
+    if (self.lj_isAsyncFileCollection) {
         return NSNotFound; // TODO:
     } else {
         return [self lj_estimatedAssetCount];
@@ -121,7 +114,7 @@ static void* const kPHAssetCollection_LJAsyncFiles_AsyncFile    = (void *)&kPHAs
 
 - (BOOL)lj_isEqual:(id)object {
     
-    if (self.lj_asyncFiles) {
+    if (self.lj_isAsyncFileCollection) {
         PHAssetCollection* collection = object;
         return [self.lj_UUID isEqual:[collection lj_UUID]];
     } else {
@@ -131,7 +124,7 @@ static void* const kPHAssetCollection_LJAsyncFiles_AsyncFile    = (void *)&kPHAs
 
 - (BOOL)lj_hash {
     
-    if (self.lj_asyncFiles) {
+    if (self.lj_isAsyncFileCollection) {
         return [self.lj_UUID hash];
     } else {
         return [self lj_hash];

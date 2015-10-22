@@ -9,6 +9,7 @@
 #import "LJAsyncFilesViewController.h"
 
 #import "LJAsyncFilesManager.h"
+#import "LJTempAsyncFile.h"
 
 @interface LJAsyncFilesViewController ()
 
@@ -21,7 +22,15 @@
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [[LJAsyncFilesManager sharedManager] setMode:LJAsyncFilesManagerModeAsyncFiles];
+            LJAsyncFilesManager* asyncFileManager = [LJAsyncFilesManager sharedManager];
+            asyncFileManager.mode = LJAsyncFilesManagerModeAsyncFiles;
+            
+            NSMutableArray* temp = [NSMutableArray array];
+            for (int i=0; i<30; i++) {
+                LJTempAsyncFile* file = [LJTempAsyncFile new];
+                [temp addObject:file];
+            }
+            asyncFileManager.asyncFiles = temp.copy;
             
             // init picker
             CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
