@@ -8,12 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, LJAsyncFilesManagerMode) {
+    LJAsyncFilesManagerModeNone         = 0,
+    LJAsyncFilesManagerModeAsyncFiles   = 1,
+    LJAsyncFilesManagerModeCombined     = 2
+};
+
+static const NSInteger LJAssetCollectionSubtypeAsyncFiles = 10001; // TODO:
+
 @protocol LJAsyncFile;
 
 @interface LJAsyncFilesManager : NSObject
 
-+ (BOOL)useAsyncFiles;
+@property (assign) LJAsyncFilesManagerMode mode;
+
 + (instancetype)sharedManager;
++ (LJAsyncFilesManagerMode)mode;
+
 - (NSArray<id<LJAsyncFile>> *)asyncFiles;
 
 @end

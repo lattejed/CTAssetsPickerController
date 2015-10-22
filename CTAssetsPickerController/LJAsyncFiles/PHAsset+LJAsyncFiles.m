@@ -24,12 +24,12 @@ static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncF
         
         [self lj_swizzleMethodNamesForClass:@[
                                               @"fetchAssetsInAssetCollection:options:",
-                                              @"fetchAssetsWithLocalIdentifiers:options:",
+                                              //@"fetchAssetsWithLocalIdentifiers:options:",
                                               @"fetchKeyAssetsInAssetCollection:options:",
-                                              @"fetchAssetsWithBurstIdentifier:options:",
+                                              //@"fetchAssetsWithBurstIdentifier:options:",
                                               @"fetchAssetsWithOptions:",
-                                              @"fetchAssetsWithMediaType:options:",
-                                              @"fetchAssetsWithALAssetURLs:options:",
+                                              //@"fetchAssetsWithMediaType:options:",
+                                              //@"fetchAssetsWithALAssetURLs:options:",
                                               ]];
         
         [self lj_swizzleMethodNamesForInstance:@[
@@ -44,12 +44,6 @@ static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncF
 }
 
 #pragma mark -
-
-+ (BOOL)lj_asyncFiles {
-    return [LJAsyncFilesManager useAsyncFiles];
-}
-
-// TODO: Needed?
 
 - (BOOL)lj_asyncFile {
     NSNumber* val = objc_getAssociatedObject(self, kPHAsset_LJAsyncFiles_AsyncFile);
@@ -68,8 +62,6 @@ static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncF
 - (void)setLj_UUID:(NSString *)UUID {
     objc_setAssociatedObject(self, kPHAsset_LJAsyncFiles_UUID, UUID, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
-#define NSLog(...)
 
 #pragma mark - Swizzled Class Methods
 
@@ -95,11 +87,11 @@ static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncF
     }
 }
 
-// TODO:
+/*
 + (PHFetchResult<PHAsset *> *)lj_fetchAssetsWithLocalIdentifiers:(NSArray<NSString *> *)identifiers
                                                          options:(nullable PHFetchOptions *)options {
     return [self lj_fetchAssetsWithLocalIdentifiers:identifiers options:options];
-}
+}*/
 
 + (nullable PHFetchResult<PHAsset *> *)lj_fetchKeyAssetsInAssetCollection:(PHAssetCollection *)assetCollection
                                                                   options:(nullable PHFetchOptions *)options {
@@ -110,30 +102,35 @@ static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncF
     }
 }
 
-// TODO:
+/*
 + (PHFetchResult<PHAsset *> *)lj_fetchAssetsWithBurstIdentifier:(NSString *)burstIdentifier
                                                         options:(nullable PHFetchOptions *)options {
     return [self lj_fetchAssetsWithBurstIdentifier:burstIdentifier options:options];
-}
+}*/
 
 + (PHFetchResult<PHAsset *> *)lj_fetchAssetsWithOptions:(PHFetchOptions *)options {
-    
-    // In CTAssetsPickerController this is only called to check for a non-zero count
-    
-    return [self temp_fetchResult];
+
+    LJAsyncFilesManagerMode mode = [LJAsyncFilesManager mode];
+    if (mode == LJAssetCollectionSubtypeAsyncFiles) {
+        return [self temp_fetchResult];
+    } else if (mode == LJAsyncFilesManagerModeCombined) {
+        NSAssert(NO, @"Not implemented yet"); return nil;
+    } else {
+        return [self lj_fetchAssetsWithOptions:options];
+    }
 }
 
-// TODO:
+/*
 + (PHFetchResult<PHAsset *> *)lj_fetchAssetsWithMediaType:(PHAssetMediaType)mediaType
                                                   options:(nullable PHFetchOptions *)options {
     return [self lj_fetchAssetsWithMediaType:mediaType options:options];
-}
+}*/
 
-// TODO:
+/*
 + (PHFetchResult<PHAsset *> *)lj_fetchAssetsWithALAssetURLs:(NSArray<NSURL *> *)assetURLs
                                                     options:(nullable PHFetchOptions *)options {
     return [self lj_fetchAssetsWithALAssetURLs:assetURLs options:options];
-}
+}*/
 
 #pragma mark - Swizzled Instance Methods
 
