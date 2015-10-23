@@ -63,9 +63,6 @@ static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncF
     return objc_getAssociatedObject(self, kPHAsset_LJAsyncFiles_UUID);
 }
 
-- (void)setLj_UUID:(NSString *)UUID {
-}
-
 #pragma mark - Swizzled Class Methods
 
 + (PHFetchResult *)lj_asyncFilesFetchResults {
@@ -144,7 +141,7 @@ static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncF
     }
 }
 
-- (BOOL)lj_hash {
+- (NSUInteger)lj_hash {
     
     if (self.lj_asyncFile != nil) {
         return [self.lj_UUID hash];
