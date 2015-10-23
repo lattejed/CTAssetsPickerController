@@ -23,5 +23,6 @@ typedef NS_ENUM(NSInteger, LJAsyncFileMediaType) {
 @property (assign, readonly) NSUInteger pixelHeight;
 
 - (void)imageForSize:(CGSize)size block:(void(^)(UIImage* image, NSDictionary* info))block;
+- (void)streamableUrlWithBlock:(void(^)(NSURL* url, NSDictionary* info))block;
 
 @end

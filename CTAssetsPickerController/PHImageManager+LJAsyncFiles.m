@@ -22,7 +22,7 @@
                                                  //@"requestImageDataForAsset:options:resultHandler:",
                                                  @"cancelImageRequest:",
                                                  //@"requestLivePhotoForAsset:targetSize:contentMode:options:resultHandler:",
-                                                 //@"requestPlayerItemForVideo:options:resultHandler:",
+                                                 @"requestPlayerItemForVideo:options:resultHandler:",
                                                  //@"requestExportSessionForVideo:options:exportPreset:resultHandler:",
                                                  //@"requestAVAssetForVideo:options:resultHandler:"
                                                  ]];
@@ -82,16 +82,20 @@
     }
 }*/
 
-/*
+// TODO: This gets hit when play is pressed
 - (PHImageRequestID)lj_requestPlayerItemForVideo:(PHAsset *)asset
                                          options:(nullable PHVideoRequestOptions *)options
                                    resultHandler:(void (^)(AVPlayerItem *__nullable playerItem, NSDictionary *__nullable info))resultHandler {
     if (asset.lj_asyncFile) {
+        [asset.lj_asyncFile streamableUrlWithBlock:^(NSURL *url, NSDictionary *info) {
+            AVPlayerItem* item = [AVPlayerItem playerItemWithURL:url];
+            resultHandler(item, nil);
+        }];
         return PHInvalidImageRequestID;
     } else {
         return [self lj_requestPlayerItemForVideo:asset options:options resultHandler:resultHandler];
     }
-}*/
+}
 
 /*
 - (PHImageRequestID)lj_requestExportSessionForVideo:(PHAsset *)asset
