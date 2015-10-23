@@ -639,6 +639,7 @@ NSString * const CTAssetsGridViewFooterIdentifier = @"CTAssetsGridViewFooterIden
     
     CGSize targetSize = [self.picker imageSizeForContainerSize:attributes.size];
     
+    [(CTAssetThumbnailView *)cell.backgroundView bind:nil asset:nil];
     [self requestThumbnailForCell:cell targetSize:targetSize asset:asset];
 
     return cell;
@@ -646,7 +647,7 @@ NSString * const CTAssetsGridViewFooterIdentifier = @"CTAssetsGridViewFooterIden
 
 - (void)requestThumbnailForCell:(CTAssetsGridViewCell *)cell targetSize:(CGSize)targetSize asset:(PHAsset *)asset
 {
-    NSInteger tag = cell.tag + 1;
+    NSInteger tag = asset.hash;
     cell.tag = tag;
 
     [self.imageManager requestImageForAsset:asset
@@ -654,6 +655,7 @@ NSString * const CTAssetsGridViewFooterIdentifier = @"CTAssetsGridViewFooterIden
                                 contentMode:PHImageContentModeAspectFill
                                     options:self.picker.thumbnailRequestOptions
                               resultHandler:^(UIImage *image, NSDictionary *info){
+                                  
                                   // Only update the image if the cell tag hasn't changed. Otherwise, the cell has been re-used.
                                   if (cell.tag == tag)
                                       [(CTAssetThumbnailView *)cell.backgroundView bind:image asset:asset];
