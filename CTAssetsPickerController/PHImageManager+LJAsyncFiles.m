@@ -82,7 +82,6 @@
     }
 }*/
 
-// TODO: This gets hit when play is pressed
 - (PHImageRequestID)lj_requestPlayerItemForVideo:(PHAsset *)asset
                                          options:(nullable PHVideoRequestOptions *)options
                                    resultHandler:(void (^)(AVPlayerItem *__nullable playerItem, NSDictionary *__nullable info))resultHandler {

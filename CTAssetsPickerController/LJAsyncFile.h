@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, LJAsyncFileMediaType) {
 @property (assign, readonly) LJAsyncFileMediaType mediaType;
 @property (assign, readonly) NSUInteger pixelWidth;
 @property (assign, readonly) NSUInteger pixelHeight;
+@property (assign, readonly) NSTimeInterval duration;
 
 - (void)imageForSize:(CGSize)size block:(void(^)(UIImage* image, NSDictionary* info))block;
 - (void)streamableUrlWithBlock:(void(^)(NSURL* url, NSDictionary* info))block;

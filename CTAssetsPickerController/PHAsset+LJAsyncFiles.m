@@ -39,7 +39,8 @@ static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncF
                                                  @"mediaType",
                                                  @"mediaSubtypes",
                                                  @"pixelWidth",
-                                                 @"pixelHeight"
+                                                 @"pixelHeight",
+                                                 @"duration"
                                                  ]];
     });
 }
@@ -183,6 +184,14 @@ static void* const kPHAsset_LJAsyncFiles_UUID       = (void *)&kPHAsset_LJAsyncF
         return self.lj_asyncFile.pixelHeight;
     } else {
         return [self lj_pixelHeight];
+    }
+}
+
+- (NSTimeInterval)lj_duration {
+    if (self.lj_asyncFile != nil) {
+        return self.lj_asyncFile.duration;
+    } else {
+        return [self lj_duration];
     }
 }
 
