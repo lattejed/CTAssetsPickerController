@@ -177,7 +177,7 @@ static void* const kPHFetchResult_LJAsyncFiles_AsyncFiles       = (void *)&kPHFe
 - (NSUInteger)lj_countOfAssetsWithMediaType:(PHAssetMediaType)mediaType {
     
     if (self.lj_hasAsyncFiles) {
-        BOOL count = 0;
+        NSUInteger count = 0;
         LJAsyncFileMediaType type = (LJAsyncFileMediaType)mediaType;
         for (id result in self.lj_backingStore) {
             if ([result isKindOfClass:[PHAsset class]]) {
